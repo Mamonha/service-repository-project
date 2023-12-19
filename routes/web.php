@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,13 +21,4 @@ Route::get('/info', function () {
     phpinfo();
 });
 
-Route::get('/ping', function (Request  $request) {    
-    $connection = DB::connection('mongodb');
-    $msg = 'MongoDB is accessible!';
-    try {  
-    $connection->command(['ping' => 1]);  
-        } catch (\Exception  $e) {  
-    $msg = 'MongoDB is not accessible. Error: ' . $e->getMessage();
-    }
-    return ['msg' => $msg];
- });
+Route::get('/store-product', [ProductController::class, 'store']);
