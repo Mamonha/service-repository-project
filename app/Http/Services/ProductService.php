@@ -24,6 +24,16 @@ class ProductService
         return $this->repository->update($product, $data);
     }
 
+    public function showProduct($id)
+    {
+        return $this->repository->show($id);
+    }
+
+    public function indexProduct()
+    {
+        return $this->repository->index();
+    }
+
     public function deleteProduct($id)
     {
         $product = ProductsMongoDB::findOrFail($id);
