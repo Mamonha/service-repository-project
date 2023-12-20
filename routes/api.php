@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Produc;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,12 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
- Route::get('/create_products/', function (Request $request) {
-    $success = ProductsMongoDB::create([
-        'guid'=> 'cust_1111',
-        'sku' => '55',
-        'name'=> 'Vassoura',
-        'category' => 'ferramentas',
-        'description' => 'Teste apenas',
-    ]);
-}); 
+Route::prefix('products')->group(function () {
+    Route::post('/', [ProductController::class, 'create']); // Rota para criar um produto
+    Route::put('/{id}', [ProductController::class, 'update']); // Rota para atualizar um produto
+    Route::delete('/{id}', [ProductController::class, 'delete']); // Rota para excluir um produto
+});
