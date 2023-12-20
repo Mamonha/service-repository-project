@@ -20,5 +20,3 @@ Route::get('/', function () {
 Route::get('/info', function () {
     phpinfo();
 });
-
-Route::get('/store-product', [ProductController::class, 'store']);
