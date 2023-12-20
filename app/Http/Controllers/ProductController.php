@@ -16,12 +16,30 @@ class ProductController extends Controller
         $this->service = $service;
     }
 
-    public function create(Request $request)
+    public function index()
+    {
+        $product = $this->service->indexProduct();
+        return response()->json([
+            'message' => 'All Products',
+            'product' => $product
+        ]);
+    }
+
+    public function store(Request $request)
     {
         $product = $this->service->createProduct($request->all());
 
         return response()->json([
             'message' => 'Product created successfully',
+            'product' => $product
+        ]);
+    }
+
+    public function show($id)
+    {
+        $product = $this->service->showProduct($id);
+        return response()->json([
+            'message' => 'Product data:',
             'product' => $product
         ]);
     }
@@ -36,7 +54,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $this->service->deleteProduct($id);
 
