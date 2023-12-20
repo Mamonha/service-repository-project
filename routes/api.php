@@ -19,8 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('products')->group(function () {
-    Route::post('/', [ProductController::class, 'create']); // Rota para criar um produto
-    Route::put('/{id}', [ProductController::class, 'update']); // Rota para atualizar um produto
-    Route::delete('/{id}', [ProductController::class, 'delete']); // Rota para excluir um produto
-});
+Route::resource('products', ProductController::class)->only(['store', 'update', 'destroy', 'show', 'index']);
