@@ -16,5 +16,5 @@ class ProductsMongoDB extends Model
     protected  $collection = 'laracoll';
 
 
-    protected  $fillable = ['guid','sku','name', 'category', 'description'];
+    protected  $fillable = ['guid','sku','name', 'category', 'description', 'price'];
 }
