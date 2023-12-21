@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 use App\Http\Repositories\ProductRepository;
 use App\Models\ProductsMongoDB;
+use Illuminate\Http\Request;
 
 class ProductService
 {
@@ -11,6 +12,18 @@ class ProductService
     public function __construct(ProductRepository $repository)
     {
         $this->repository = $repository;
+    }
+
+    public function validateProductData(Request $request)
+    {
+        return $request->validate([
+            'guid' => 'required|string',
+            'sku' => 'required|string',
+            'name' => 'required|string',
+            'price' => 'required|numeric',
+            'category' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
     }
 
     public function createProduct(array $data)
