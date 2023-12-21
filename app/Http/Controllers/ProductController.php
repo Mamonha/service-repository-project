@@ -27,8 +27,9 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $product = $this->service->createProduct($request->all());
-
+        $validateProduct = $this->service->validateProductData($request); 
+        $product = $this->service->createProduct($validateProduct);
+        
         return response()->json([
             'message' => 'Product created successfully',
             'product' => $product
@@ -46,7 +47,8 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = $this->service->updateProduct($id, $request->all());
+        $validateProduct = $this->service->validateProductData($request); 
+        $product = $this->service->updateProduct($id, $validateProduct);
 
         return response()->json([
             'message' => 'Product updated successfully',
